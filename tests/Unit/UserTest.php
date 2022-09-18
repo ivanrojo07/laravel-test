@@ -57,7 +57,7 @@ class UserTest extends TestCase
     }
 
     //Perform a post() request to add a new user
-    public function test_if_it_stores_new_users()
+    public function test_it_stores_new_users()
     {
         $response = $this->post('/register', [
             'name' => 'Dary',
@@ -66,7 +66,7 @@ class UserTest extends TestCase
             'password_confirmation' => 'dary1234'
         ]);
 
-        $response->assertRedirect('/home');
+        $response->assertRedirect('/dashboard');
     }
 
     public function test_if_data_exists_in_database()
@@ -78,7 +78,7 @@ class UserTest extends TestCase
 
     public function test_if_data_does_not_exists_in_database()
     {
-        $this->assertDatabaseHas('users', [
+        $this->assertDatabaseMissing('users', [
             'name' => 'John'
         ]);
     }
@@ -88,8 +88,8 @@ class UserTest extends TestCase
         $this->seed();
     }
 
-    public function test_if_seeder_works()
-    {
-        $this->seed(UsersTableSeeder::class);
-    }
+    // public function test_if_seeder_works()
+    // {
+    //     $this->seed(UsersTableSeeder::class);
+    // }
 }
